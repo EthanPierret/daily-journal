@@ -1,0 +1,18 @@
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.short {
+    width: 3em;
+}
+
+form {
+width: 50%;
+}
