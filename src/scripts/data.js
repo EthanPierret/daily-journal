@@ -1,4 +1,6 @@
 
+
+
 const rawdatahandler = {
 
 getrawdata: function() {
@@ -11,5 +13,5 @@ getrawdata: function() {
 }
 }
 
-
+export default rawdatahandler;
 

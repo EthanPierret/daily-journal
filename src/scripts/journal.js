@@ -1,3 +1,8 @@
+import rawdatahandler from "./data.js"
+
+
+
+
 let data = rawdatahandler;
 let form = formater;
 let dom = domeditor;
