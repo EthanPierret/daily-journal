@@ -6,7 +6,7 @@ import domeditor from "./entriesDOM"
 
 
 let data = rawdatahandler;
-let form = formater;
+let form = makeJournalEntryComponent;
 let dom = domeditor;
  
 
