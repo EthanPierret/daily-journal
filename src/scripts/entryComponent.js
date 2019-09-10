@@ -23,3 +23,5 @@ makeJournalEntryComponent: function(journalEntry) {
 
 
 }
+
+export default makeJournalEntryComponent;

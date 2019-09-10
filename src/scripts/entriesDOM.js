@@ -8,3 +8,6 @@ parsedentries: function(entry) {
 
 
 }
+
+
+export default domeditor;
