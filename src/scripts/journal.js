@@ -1,4 +1,6 @@
 import rawdatahandler from "./data.js"
+import makeJournalEntryComponent from "./entryComponent"
+import domeditor from "./entriesDOM"
 
 
 
