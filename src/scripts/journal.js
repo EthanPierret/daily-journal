@@ -1,6 +1,7 @@
-import rawdatahandler from "./data.js"
-import makeJournalEntryComponent from "./entryComponent"
-import domeditor from "./entriesDOM"
+import rawdatahandler from "./data.js";
+import makeJournalEntryComponent from "./entryComponent.js";
+import domeditor from "./entriesDOM.js";
+
 
 
 
@@ -22,24 +23,52 @@ let dom = domeditor;
 
 data.getrawdata().then(data => continueloading(data)); // wait for then pass data to continue program
 
-
+let deletedid = null; // id of last deleted item, program seems to be loading new results before waiting for the deltetion, i think its a database problem.
 
 
 function continueloading(jentries) { // called after the data comes in
 
 
-
-console.log(jentries.length);
+console.log("Sorting these:");
 console.log(jentries);
+console.log(jentries.length);
+clearEntries();
+
+
 
 
 
 for (let i = 0; i < jentries.length; i++) { // loop through all entries
 
-    const entryAsHTML = form.makeJournalEntryComponent(jentries[i]); // make a contained div
+
+    if ( jentries[i].id != deletedid) {
+
+    const entryAsHTML = form.makeJournalEntryComponent(jentries[i],jentries[i].id); // make a contained div
     console.log(jentries[i])
     dom.parsedentries(entryAsHTML); // append to the dom
+    }
+
+
 }
+
+let buttons = document.querySelectorAll(".removebutton");
+
+for (let i = 0; i < buttons.length; i++) { // loop through all entries
+
+    
+    buttons[i].addEventListener("click", event => {
+        console.log("Deleting: ");
+        console.log(buttons[i].value);
+        
+        
+
+        data.delete(buttons[i].value.toString()).then(data.getrawdata().then(data => continueloading(data)));
+        deletedid = buttons[i].value;
+        
+    })
+
+}
+
 
 }
 
@@ -47,39 +76,25 @@ for (let i = 0; i < jentries.length; i++) { // loop through all entries
  function saveJournalEntry(entry) {
 
 
-    
-    console.log("Posting:");
-    console.log(data);
+   
 
-    let pastentries = fetch('http://localhost:3000/entries')
-    .then(
-    
+        fetch(`http://localhost:3000/entries`).then
+        
         fetch('http://localhost:3000/entries', { // save to list "entries"
         method: 'POST',
         headers: {
-          'Accept': 'application/json',
+          //'Accept': 'application/json',
           'Content-Type': 'application/json'
                 },
-        body: pastentries + JSON.stringify(entry) // save the data to file
-        })
-    ).then(addSingleElement(entry)
+        body: JSON.stringify(entry) // save the data to file
+    }).then(data.getrawdata().then(data => continueloading(data)));
 
-       
-
-    );
+    
 
  }
 
 
 
-// add a single element so the entire page does not have to reload every time i add a entry
- function addSingleElement(element) {
-
-    let entryAsHTML = form.makeJournalEntryComponent(element); // make a contained div
-    console.log(element);
-    dom.parsedentries(entryAsHTML); // append to the dom
-
- }
 
 
  //clears the entries and framework
@@ -89,45 +104,121 @@ for (let i = 0; i < jentries.length; i++) { // loop through all entries
 
 
 
+// another fancy way of saying on load
+ window.addEventListener("load",function() {
+    document.getElementById('journal-form').addEventListener("submit",function(e) {
+      e.preventDefault(); // before the code
+      
+        validateForm();
+      
+    });
+  });
 
-function validateForm() {
-    if (document.querySelector("#journalDate").value === `undefined`) {
+  window.addEventListener("load",function() {
+    document.getElementById('search-form').addEventListener("submit",function(e) {
+      e.preventDefault(); // before the code
+      
+        loadsearch();
+      
+    });
+  });
 
-        alert("Must have a Date");
 
-    } else if (document.querySelector("#journalEntry").value === `undefined`) {
 
-        alert("Must have a Entry");
+function loadsearch() {
 
-    } else {
+document.querySelector("#searchsubmit").addEventListener("click", event => {
+    const searchfor = document.querySelector("#searchbar").value;
 
-        let data =  { // get journal data from html
+   
+    console.log("Searching keyword: " + searchfor);
+
+    data.getrawdata().then( data => sortdata(data, searchfor.toLowerCase()));
+
         
-            journalDate : document.querySelector("#journalDate").value,
-            concpetsCovered : document.querySelector("#concpetsCovered").value,
-            journalEntry : document.querySelector("#journalEntry").value,
-            mood : document.querySelector("#mood").value,
-        
-        
-                    
+
     
-                };
-            saveJournalEntry(data);
 
-    }
+})
+
+}
+
+
+function sortdata (target, searchvar) {
+
+    let workinglist = [];
+
+
+    target.forEach(datapeice => {
+
+        let add = false;
+
+
+        // Iterate all of the values of the current datapeice
+        for (const value of Object.values(datapeice)) {
+
+            let teststring = value.toString().toLowerCase();
+            if(teststring.includes(searchvar)) {
+                add = true;
+            }
+            console.log(searchvar);
+
+        }
+
+        if (add == true) {
+            workinglist.push(datapeice);
+            console.log("pushing");
+            console.log(datapeice);
+        }
+
+    })
+
+
+     continueloading(workinglist);
+
 }
 
 
 
 
 
+function validateForm() {
 
-//add submit button functionality
+        console.log("Preparing to submit");
+        
+    
+        let data =  { // get journal data from html
+        
+            date : document.querySelector("#journalDate").value,
+            conceptscovered : document.querySelector("#concpetsCovered").value,
+            entry : document.querySelector("#journalEntry").value,
+            mood : document.querySelector("#mood").value,
+        
+    
+                };
 
-document.querySelector('#submit').addEventListener( "click", event => {
+            saveJournalEntry(data);
+            console.log("Saving:");
+            console.log(data);
 
-    validateForm();
-                
+    }
 
-}); 
 
+   
+
+
+let searchoptions = document.querySelectorAll(".sortbutton");
+
+for (let i=0; i < searchoptions.length; i++) {
+
+    searchoptions[i].addEventListener("click", event => {
+        const mood = event.target.value;
+
+       
+        console.log("Searching mood: " + mood);
+
+        data.getrawdata().then(data => continueloading(data.filter(target => target.mood.toLowerCase() == mood)));
+
+    })
+
+}
