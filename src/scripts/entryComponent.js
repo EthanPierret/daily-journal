@@ -9,13 +9,14 @@ makeJournalEntryComponent: function(journalEntry, id) {
    
    workingdiv.innerHTML = `
    <section id="jentry${id}">
-   <h4>${journalEntry.date}, ${journalEntry.conceptscovered}</h4>
-   <p>${journalEntry.entry}</p>
-   <p>Mood: ${journalEntry.mood}</p>
+   <div class="inline"><h4 id="date${id}">${journalEntry.date}</h4><h4>, </h4><h4 id="concepts${id}">${journalEntry.conceptscovered}</h4></div>
+   <p id="entry${id}">${journalEntry.entry}</p>
+   <div class="inline"><p>Mood: </p><p id="mood${id}">${journalEntry.mood}</p></div>
    <input type="hidden" class="idholder" value="${id}" />
    <button class="removebutton" value="${id}">Delete</button>
+   <button class="editbutton" value="${id}">Edit</button>
    <input type="hidden" class="idholder" value="${id}" />
-    </section
+    </section>
    `
         
 

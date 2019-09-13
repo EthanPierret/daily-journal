@@ -1,11 +1,11 @@
 {
   "entries": [
     {
-      "id": "0",
-      "date": "8.16.19",
+      "date": "2019-08-12",
       "conceptscovered": "HTML and CSS",
       "entry": "This class moves fast, already were doing advanced styling with somthing similar to float: flexbox",
-      "mood": "Great"
+      "mood": "good",
+      "id": "0"
     },
     {
       "date": "8.24.19",
