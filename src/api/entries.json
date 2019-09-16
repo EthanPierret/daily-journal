@@ -1,40 +1,25 @@
 {
-"entries" : [
-
+  "entries": [
     {
-        "date" : "8.16.19",
-        "conceptscovered" : "HTML and CSS",
-        "entry" : "This class moves fast, already were doing advanced styling with somthing similar to float: flexbox",
-        "mood" : "Great"
-    
-    
-    
+      "date": "2019-08-12",
+      "conceptscovered": "HTML and CSS",
+      "entry": "This class moves fast, already were doing advanced styling with somthing similar to float: flexbox",
+      "mood": "good",
+      "id": "0"
     },
-    
     {
-        "date" : "8.24.19",
-        "conceptscovered" : "Website presentation",
-        "entry" : "Did not get my website to it's best, probally becuase i was preoccupied helping others",
-        "mood" : "Sad"
-    
-    
-    
+      "date": "8.24.19",
+      "conceptscovered": "Website presentation",
+      "entry": "Did not get my website to it's best, probally becuase i was preoccupied helping others",
+      "mood": "Sad",
+      "id": "1"
     },
-    
     {
-        "date" : "8.26.19",
-        "conceptscovered" : "JavaScript",
-        "entry" : "Javascript can do either primitive or advanced varaibles",
-        "mood" : "Good"
-    
-    
-    
+      "date": "8.26.19",
+      "conceptscovered": "JavaScript",
+      "entry": "Javascript can do either primitive or advanced varaibles",
+      "mood": "Good",
+      "id": "2"
     }
-    
-    
-    
-    
-]
-
-
+  ]
 }

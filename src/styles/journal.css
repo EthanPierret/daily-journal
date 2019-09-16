@@ -16,3 +16,14 @@ fieldset {
 form {
 width: 50%;
 }
+
+.inline {
+    display: flex;
+    flex-direction: row;
+}
+
+.halfw {
+
+width: 40%;
+
+}
