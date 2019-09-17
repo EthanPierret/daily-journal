@@ -4,22 +4,47 @@
       "date": "2019-08-12",
       "conceptscovered": "HTML and CSS",
       "entry": "This class moves fast, already were doing advanced styling with somthing similar to float: flexbox",
-      "mood": "good",
+      "moodsId": 3,
       "id": "0"
     },
     {
       "date": "8.24.19",
       "conceptscovered": "Website presentation",
       "entry": "Did not get my website to it's best, probally becuase i was preoccupied helping others",
-      "mood": "Sad",
+      "moodsId": 1,
       "id": "1"
     },
     {
       "date": "8.26.19",
       "conceptscovered": "JavaScript",
       "entry": "Javascript can do either primitive or advanced varaibles",
-      "mood": "Good",
+      "moodsId": 3,
       "id": "2"
+    },
+    {
+      "date": "2019-09-17",
+      "conceptscovered": "Lab",
+      "entry": "Testing this functonality!",
+      "moodsId": "2",
+      "id": "sds-dc"
+    }
+  ],
+  "moods": [
+    {
+      "id": 1,
+      "name": "Sad"
+    },
+    {
+      "id": 2,
+      "name": "Ok"
+    },
+    {
+      "id": 3,
+      "name": "Good"
+    },
+    {
+      "id": 4,
+      "name": "Great"
     }
   ]
 }

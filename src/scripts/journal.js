@@ -26,6 +26,28 @@ data.getrawdata().then(data => continueloading(data)); // wait for then pass dat
 let deletedid = null; // id of last deleted item, program seems to be loading new results before waiting for the deltetion, i think its a database problem.
 
 
+data.getmoods().then(moods => makeemtionslist(moods));
+
+function makeemtionslist(moods) {
+
+    console.log("Moods:");
+    console.log(moods);
+
+    let container = document.querySelector("#mood");
+
+    for (let i = 0; i < moods.length; i++) {
+
+        container.innerHTML += `
+        <option value="${moods[i].id}">${moods[i].name}</option>
+        `;
+
+
+    }
+
+}
+
+
+
 function continueloading(jentries) { // called after the data comes in
 
 
@@ -76,13 +98,13 @@ function continueloading(jentries) { // called after the data comes in
 
 
         ebuttons[i].addEventListener("click", event => {
-            console.log("Deleting: ");
+            console.log("Editing: ");
             console.log(ebuttons[i].value);
 
             editentry(ebuttons[i].value.toString());
 
-            data.delete(ebuttons[i].value.toString()).then(data.getrawdata().then(data => continueloading(data)));
-            deletedid = ebuttons[i].value;
+            data.getrawdata().then(data => continueloading(data));
+
 
         })
 
@@ -250,7 +272,7 @@ function validateForm() {
         date: document.querySelector("#journalDate").value,
         conceptscovered: document.querySelector("#concpetsCovered").value,
         entry: document.querySelector("#journalEntry").value,
-        mood: document.querySelector("#mood").value,
+        moodsId: Number(document.querySelector("#mood").value),
 
 
     };

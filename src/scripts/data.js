@@ -6,7 +6,7 @@ const rawdatahandler = {
       getrawdata: function () {
 
 
-            return fetch("http://localhost:3000/entries").then(entrieslist => entrieslist.json())
+            return fetch("http://localhost:3000/entries?_expand=moods").then(entrieslist => entrieslist.json())
 
 
 
@@ -20,6 +20,10 @@ const rawdatahandler = {
                   method: "DELETE"
             })
 
+      },
+
+      getmoods: function () {
+            return fetch("http://localhost:3000/moods").then(entrieslist => entrieslist.json())
       }
 
 
