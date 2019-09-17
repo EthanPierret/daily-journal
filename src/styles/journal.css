@@ -13,6 +13,11 @@ fieldset {
     width: 3em;
 }
 
+p {
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+}
+
 form {
 width: 50%;
 }
